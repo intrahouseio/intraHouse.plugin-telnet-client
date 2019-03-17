@@ -1,0 +1,23 @@
+{
+  "Host": "Host",
+  "Port": "Port",
+  "Command": "Команда",
+  "Interval": "Интервал опроса (сек)",
+  "Username": "Username",
+  "Password": "Password",
+  "Device": "Устройство",
+  "Parser": "Тип обработки",
+  "Request": "Запрос",
+  "Channel": "Канал",
+  "Json": "Извлечение данных JSON",
+  "Regexp": "Регулярное выражение (RegExp.exec)",
+  "Regexptest": "Регулярное выражение (RegExp.test)",
+  "Flag": "Флаг",
+  "Rescount": "Элемент массива (result)",
+  "Number": "Преобразовать в число",
+  "Actions": "Команды",
+  "Action": "Команда",
+  "ValueTrue":"Если найдено, установить значение:",
+  "ValueFalse":"Если не найдено, установить значение:",
+  "Updatestate": "Обновить состояние, после выполнения команды"
+}

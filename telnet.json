@@ -1,0 +1,122 @@
+{
+  "id": "telnet",
+  "description": "Telnet plugin",
+  "gendevices": 0,
+  "smart": 1,
+  "restartOnChannelsChange":1,
+  "single": 0,
+  "module": "index.js",
+  "params": [],
+  "genrules": {},
+  "commands": [],
+  "sch": {
+    "parent": true,
+    "scheme": {
+      "tools": { "filter": false, "fixed": false, "name": "", "order": -1, "type": "parent", "width": 30 },
+      "host": { "filter": true, "fixed": false, "name": "$Host", "order": 1, "type": "STRING", "width": 150 },
+      "port": { "filter": true, "fixed": false, "name": "$Port", "order": 2, "type": "STRING", "width": 120 },
+      "dn": { "filter": true, "fixed": false, "name": "$Device", "order": 4, "type": "STRING", "width": 200 },
+      "parseType": { "filter": false, "fixed": false, "name": "$Parser", "order": 5, "type": "STRING", "width": 150 },
+      "command": { "filter": false, "fixed": false, "name": "$Command", "order": 3, "type": "STRING", "width": 350 },
+      "interval": { "filter": false, "fixed": false, "name": "$Interval", "order": 5, "type": "STRING", "width": 170 }
+    },
+    "record": {
+      "req": {
+        "name": "$Request",
+        "order": 0,
+        "toolbar": false,
+        "properties": {
+          "host": { "name": "$Host", "order": 0, "type": "STRING" },
+          "port": { "name": "$Port", "order": 1, "type": "NUMBER" },
+          "username": { "name": "$Username", "order": 2, "type": "STRING" },
+          "password": { "name": "$Password", "order": 3, "type": "STRING" },
+          "command": { "name": "$Command", "order": 4, "type": "STRING" },
+          "interval": { "name": "$Interval", "order": 5, "type": "NUMBER" }
+        }
+      },
+      "channel": {
+        "name": "$Channel",
+        "order": 2,
+        "toolbar": false,
+        "properties": {
+          "dn": { "name": "$Device", "order": 1, "type": "autocomplete", "data": "devicesdroplist" },
+          "parseType": { "name": "$Parser", "order": 2, "type": "autocomplete",
+            "data": [
+              { "id": "json", "name": "JSON" },
+              { "id": "text", "name": "TEXT GET" },
+              { "id": "search", "name": "TEXT SEARCH" }
+            ]
+          },
+          "json": { "name": "$Json", "order": 3, "type": "TEXTAREA", "visible": "data.parentid && data.parseType === 'json'" },
+          "regexp": { "name": "$Regexp", "order": 4, "type": "TEXTAREA", "visible": "data.parentid && data.parseType === 'text'" },
+          "regexptest": { "name": "$Regexptest", "order": 5, "type": "TEXTAREA", "visible": "data.parentid && data.parseType === 'search'" },
+          "flag": { "name": "$Flag", "order": 6, "type": "STRING", "visible": "data.parentid && (data.parseType === 'text' || data.parseType === 'search') && data.regexp !== ''" },
+          "rescount": { "name": "$Rescount", "order": 7, "type": "NUMBER", "visible": "data.parentid && data.parseType === 'text' && data.regexp !== ''" },
+          "valueTrue": { "name": "$ValueTrue", "order": 8, "type": "STRING", "visible": "data.parentid && data.parseType === 'search'" },
+          "valueFalse": { "name": "$ValueFalse", "order": 9, "type": "STRING", "visible": "data.parentid && data.parseType === 'search'" },
+          "number": { "name": "$Number", "order": 10, "type": "cb" }
+        }
+      },
+      "actions": {
+        "name": "$Actions",
+        "order": 3,
+        "toolbar": false,
+        "properties": {
+          "actions": { "name": "$Actions", "order": 8, "type": "multi",
+            "data": {
+              "scheme": {
+                  "act": { "name": "$Action", "type": "autocomplete", "order": 0, "data":[{"id":"on", "name":"on"}, {"id":"off", "name":"off"},{"id":"toggle", "name":"toggle"},{"id":"set", "name":"set"}] },
+                  "host": { "name": "$Host", "order": 1, "type": "STRING" },
+                  "port": { "name": "$Port", "order": 2, "type": "NUMBER" },
+                  "username": { "name": "$Username", "order": 3, "type": "STRING" },
+                  "password": { "name": "$Password", "order": 4, "type": "STRING" },
+                  "command": { "name": "$Command", "order": 5, "type": "STRING" },
+                  "updatestate": { "name": "$Updatestate", "order": 6, "type": "cb" }
+                },
+                "default": {
+                  "act": "on",
+                  "host": "192.168.1.1",
+                  "port": 23,
+                  "username": "admin",
+                  "password": "123456",
+                  "command": "/ip dhcp-server lease print",
+                  "updatestate": false
+                }
+              }
+           }
+        }
+      }
+    },
+    "default": {
+      "host": "192.168.1.1",
+      "port": 23,
+      "username": "admin",
+      "password": "123456",
+      "command": "/ip dhcp-server lease print",
+      "interval": 60
+    },
+    "defaultchild": {
+      "dn": "",
+      "parseType": "json",
+      "json": "data.value",
+      "regexp": "<div\\b[^>]*>(.*?)</div>",
+      "regexptest": "[a-z0-9]",
+      "valueTrue": "1",
+      "valueFalse": "null",
+      "flag": "gm",
+      "rescount": 1,
+      "number": true,
+      "actions": [
+        {
+          "act": "on",
+          "host": "192.168.1.1",
+          "port": 23,
+          "username": "admin",
+          "password": "123456",
+          "command": "/ip dhcp-server lease print",
+          "updatestate": false
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "Host": "Host",
+  "Port": "Port",
+  "Command": "Command",
+  "Interval": "Polling interval (sec)",
+  "Username": "Username",
+  "Password": "Password",
+  "Device": "Device",
+  "Parser": "Parser",
+  "Request": "Request",
+  "Channel": "Channel",
+  "Json": "Extract JSON data",
+  "Regexp": "Regular Expression (RegExp.exec)",
+  "Regexptest": "Regular Expression (RegExp.test)",
+  "Flag": "Flag",
+  "Rescount": "Results index",
+  "Number": "Convert to number",
+  "Actions":"Actions",
+  "Action":"Action",
+  "ValueTrue":"Set value if true",
+  "ValueFalse":"Set value if false",
+  "Updatestate": "Update status after command execution"
+}
