@@ -128,8 +128,7 @@ function req(params) {
           if (res === 2 & data.toString().indexOf(">") > -1) {
             res = 3;
             err = 1;
-            c.write('exit\r\n');
-            c.write('quit\r\n');
+            c.write('exit\r\nquit\r\n');
             clearTimeout(timer);
              plugin.debug(params.host + ' res:\r\n' + temp.join('\r\n'), 1);
             resolve(temp.join('\r\n'));
