@@ -111,7 +111,7 @@ function req(params) {
       c.on('data', function (data) {
           seq = seq + 1;
 
-          if (seq === 6) {
+          if (seq === 60) {
             c.write(Buffer.from('1b5b3f36323b631b5b35333b3352', 'hex'));
             c.write(Buffer.from('1b5b35333b3152', 'hex'));
             c.write(Buffer.from('1b5b313b3152', 'hex'));
@@ -135,11 +135,11 @@ function req(params) {
           }
 
           if (res === 1 & data.toString().indexOf(">") > -1) {
-            res = 2;
+            // res = 2;
           }
 
           if (res === 0 & data.toString().indexOf(">") > -1) {
-            res = 1;
+            res = 2;
             c.write(params.command + '\r\n');
           }
       });
